@@ -8,11 +8,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class StudentService {
 
     private final StudentRepo repo;
+    private final IdService idService;
+
+
 
     public List<Student> getAllStudents(){
         return repo.findAll();
@@ -29,7 +34,8 @@ public class StudentService {
     }
 
     public Student saveNewStudent(Student student) {
-        repo.save(student);
-        return repo.findById(student.getId()).orElseThrow();
+        Student temp = student.withId(idService.generateUUID());
+        repo.save(temp);
+        return repo.findById(temp.getId()).orElseThrow();
     }
 }
