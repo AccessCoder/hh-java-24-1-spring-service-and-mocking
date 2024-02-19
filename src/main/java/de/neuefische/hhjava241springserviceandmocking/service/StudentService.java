@@ -38,4 +38,8 @@ public class StudentService {
         repo.save(temp);
         return repo.findById(temp.getId()).orElseThrow();
     }
+
+    public Student findById(String id) {
+        return repo.findById(id).orElseThrow();
+    }
 }

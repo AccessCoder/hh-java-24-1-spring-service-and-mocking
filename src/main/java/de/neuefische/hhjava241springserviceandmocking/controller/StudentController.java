@@ -29,4 +29,9 @@ public class StudentController {
     public Student saveNewStudent(@RequestBody Student student){
         return service.saveNewStudent(student);
     }
+
+    @GetMapping("/{id}")
+    public Student getStudentById(@PathVariable String id){
+        return service.findById(id);
+    }
 }
